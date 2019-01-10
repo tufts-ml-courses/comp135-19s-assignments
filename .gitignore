@@ -1,0 +1,23 @@
+# Exclude these files (use git add -f to override)
+*.pdf
+*.csv
+
+# Avoid python compiled files
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Exclude these folders
+**/raw_data/
+website_build/
+private/
+
+# Exclude temporary files created by text editors
+*~
+*~lock*
+*.DS_Store
+.*.swp
+
+# Exclude weird NFS file system dumps
+.nfs*
+
