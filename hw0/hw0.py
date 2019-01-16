@@ -34,7 +34,7 @@ def split_into_train_and_test(x_all_LF, frac_test=0.5, random_state=None):
     Examples
     --------
     >>> x_LF = np.eye(10)
-    >>> train_MF, test_NF = create_train_and_test_set(
+    >>> train_MF, test_NF = split_into_train_and_test(
     ...     x_LF, frac_test=0.3, random_state=np.random.RandomState(0))
     >>> train_MF.shape
     (7, 10)
