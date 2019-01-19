@@ -1,3 +1,5 @@
+.ipynb_checkpoints/
+
 # Exclude these files (use git add -f to override)
 *.pdf
 *.csv
