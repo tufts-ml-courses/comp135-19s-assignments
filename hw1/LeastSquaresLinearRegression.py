@@ -1,11 +1,26 @@
 import numpy as np
-
+# No other imports allowed!
 
 class LeastSquaresLinearRegressor(object):
+    ''' 
+    Class providing a linear regression model
+
+    Fit by solving the "least squares" optimization.
+
+    Attributes
+    ----------
+    * self.w_F : 1D array, size n_features (= F)
+        vector of weights for each feature
+    * self.b : float
+        scalar real bias
+    '''
 
     def __init__(self):
         ''' Constructor of an sklearn-like regressor
+
+        Should do nothing. Attributes are only set after calling 'fit'.
         '''
+        # Leave this alone
         pass
 
     def fit(self, x_NF, y_N):
@@ -18,13 +33,13 @@ class LeastSquaresLinearRegressor(object):
         Post-Condition
         --------------
         Internal attributes updated:
-        * self.w_F (vector of weights for each feature)
-        * self.b (scalar real bias, if desired)
+        * self.w_F : vector of weights for each feature
+        * self.b : scalar real bias
 
         Notes
         -----
         The least-squares optimization problem is:
-            \min_{w,b}  \sum_{n=1}^N (y_n - w^Tx_n - b)^2
+            \min_{w,b}  \sum_{n=1}^N (y_n - w^T x_n - b)^2
         '''
         N, F = x_NF.shape
         pass # TODO
@@ -45,22 +60,8 @@ class LeastSquaresLinearRegressor(object):
         # TODO FIX ME
         return np.asarray([0.0])
 
-    def print_weights_in_sorted_order(
-            self, feat_name_list=None, float_fmt_str='% 7.2f'):
-        ''' Print learned coeficients side-by-side with provided feature names
 
-        Args
-        ----
-        feat_name_list : list of str
-            Each entry gives the name of the feature in that column of x_NF
-        
-        Post condition
-        --------------
-        Printed all feature names and coef values side by side (one per line)
-        Should print all values in w_F first.
-        Final line should be the bias value.
-        '''
-        # TODO
+
 
 if __name__ == '__main__':
     ## Simple example use case

@@ -1,4 +1,5 @@
 import numpy as np
+# No other imports allowed!
 
 def calc_perf_metric__squared_error(y_N, yhat_N):
     ''' Compute the mean squared error given true and predicted values
