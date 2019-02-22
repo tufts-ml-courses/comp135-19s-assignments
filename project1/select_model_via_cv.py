@@ -7,6 +7,7 @@ This script will:
 * Load in training data given provided dataset directory (see --dataset_path)
 * Loop over the provided alpha values (see --alpha_grid)
 * For each alpha, loop over all K folds (see --num_folds)
+* Write results to a CSV file (located in folder specified by --results_path)
 * Performance metrics at each alpha value are recorded to disk in a CSV file.
 
 This is written as a script that saves intermediate runs to disk.
@@ -49,7 +50,10 @@ from LRGradientDescent import LogisticRegressionGradientDescent
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset_path', type=str)
+    parser.add_argument('--dataset_path',
+        type=str,
+        default='data_digits_8_vs_9_noisy/',
+        help='Path to folder where dataset csv files are stored. Must exist already.')
     parser.add_argument('--results_path',
         type=str,
         default='./',
@@ -62,19 +66,28 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     ## Add parsed args to local namespace
-    # So we can reference 'dataset_path' directly
+    # So we can reference args like 'dataset_path' directly
     locals().update(args.__dict__)
 
+    if dataset_path is None:
+        raise ValueError("Specify a valid --dataset_path that points to folder with x_train.csv inside")
+    if results_path is None:
+        raise ValueError("Specify a valid --results_path that points to folder to save results inside")
+
     dataset_path = os.path.abspath(dataset_path)
-    assert os.path.exists(dataset_path)
+    if not os.path.exists(dataset_path):
+        raise ValueError("Current dataset_path does not exist: %s" % dataset_path)
     results_path = os.path.abspath(results_path)
-    assert os.path.exists(results_path)
+    if not os.path.exists(results_path):
+        raise ValueError("Current results_path does not exist: %s" % results_path)
 
-    x_NF = np.loadtxt(os.path.join(dataset_path, 'x_train.csv'),
-        skiprows=1, delimiter=',')
-    y_N = np.loadtxt(os.path.join(dataset_path, 'y_train.csv'),
-        skiprows=1, delimiter=',')
-
+    try:
+        x_NF = np.loadtxt(os.path.join(dataset_path, 'x_train.csv'),
+            skiprows=1, delimiter=',')
+        y_N = np.loadtxt(os.path.join(dataset_path, 'y_train.csv'),
+            skiprows=1, delimiter=',')
+    except IOError:
+        raise ValueError("Current dataset_path does not have x_train.csv AND y_train.csv inside.")
     ## Determine how to allocate contiguous rows to the K folds
     # Try to have as evenly sized folds as possible
     N = y_N.size
