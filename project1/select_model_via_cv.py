@@ -27,12 +27,12 @@ For example, for 100 examples and 3 folds, we'd assign:
 Usage
 -----
 ## To do 3-fold CV with alpha 10 and step_size of 1.0
-$ python select_model_via_cv.py --alpha_grid 10 --step_size 1.0 --results_dir /tmp/
+$ python select_model_via_cv.py --dataset_path /path/to/data/folder/ --results_path /path/to/results/folder/ --alpha_grid 10 --step_size 1.0
 
 ## Expected output: alpha0010.0000_cv_scores.csv written to disk inside /tmp/
 
 ## To do 3-fold CV with alpha 0.1 then, we could do
-$ python select_model_via_cv.py --alpha_grid 0.1 --step_size 1.0 --results_dir /tmp/
+$ python select_model_via_cv.py --dataset_path /path/to/data/folder/ --results_path /path/to/results/folder/ --alpha_grid 10 --step_size 1.0
 
 ## Expected output: alpha0000.1000_cv_scores.csv written to disk inside /tmp/
 
