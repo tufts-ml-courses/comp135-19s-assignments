@@ -1,4 +1,5 @@
 import numpy as np
+import sklearn
 from sklearn.neural_network import MLPClassifier
 
 from scipy.optimize import fmin_l_bfgs_b
@@ -64,6 +65,10 @@ class MLPClassifierLBFGS(MLPClassifier):
             tol=1e-4,
             random_state=None,
             ):
+        if sklearn.__version__.count('19'):
+            version_specific_kws = dict()
+        else:
+            version_specific_kws = dict(n_iter_no_change=10)
         super(MLPClassifier, self).__init__(
             hidden_layer_sizes=hidden_layer_sizes,
             activation=activation,
@@ -82,7 +87,7 @@ class MLPClassifierLBFGS(MLPClassifier):
             nesterovs_momentum=True, early_stopping=False,
             validation_fraction=0.1, beta_1=0.9, beta_2=0.999,
             epsilon=1e-8,
-            )
+            **version_specific_kws)
 
     def fit(self, x, y):
         assert self.solver == 'lbfgs'
