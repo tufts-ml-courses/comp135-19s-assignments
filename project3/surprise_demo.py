@@ -14,6 +14,7 @@ train_set = Dataset.load_from_file('data_movie_lens_100k/ratings_train.csv', rea
 train_set = train_set.build_full_trainset()
 
 ## Load the test set into surprise's custom dataset object
+## (Need to use intermediate pandas DataFrame because the true ratings are missing)
 test_df = pd.read_csv('data_movie_lens_100k/ratings_test_masked.csv')
 test_set = Dataset.load_from_df(test_df, reader=reader)
 test_set = test_set.build_full_trainset().build_testset()
